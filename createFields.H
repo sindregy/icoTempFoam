@@ -19,6 +19,15 @@ dimensionedScalar nu
     transportProperties.lookup("nu")
 );
 
+//Add here...
+dimensionedScalar DT
+(
+    "DT",
+    dimViscosity,
+    transportProperties.lookup("DT")
+);
+//Done for now... 
+
 Info<< "Reading field p\n" << endl;
 volScalarField p
 (
@@ -48,6 +57,21 @@ volVectorField U
     mesh
 );
 
+//ADDED Start
+Info<< "Reading field T\n" <<endl;
+volScalarField T
+(
+    IOobject
+    (
+         "T",
+         runTime.timeName(),
+         mesh,
+         IOobject::MUST_READ,
+         IOobject::AUTO_WRITE
+     ),
+     mesh
+);
+//Added ends
 
 #include "createPhi.H"
 
