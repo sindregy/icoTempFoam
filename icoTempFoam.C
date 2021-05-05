@@ -111,6 +111,16 @@ int main(int argc, char *argv[])
             U = HbyA - rAU*fvc::grad(p);
             U.correctBoundaryConditions();
         }
+//add these lines...
+        fvScalarMatrix TEqn
+        (
+            fvm::ddt(T)
+            + fvm::div(phi, T)
+            - fvm::laplacian(DT, T)
+        );
+
+        TEqn.solve();
+//done adding lines...
 
         runTime.write();
 
